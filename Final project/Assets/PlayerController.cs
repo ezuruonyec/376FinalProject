@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigid;
     private Vector3 rotation;
     public float groundDistance = 0.0f;
-    public float JumpForce = 500;
+    public float JumpForce;
     public LayerMask isGround;
 
 
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
+        JumpForce = Mathf.Sqrt(2 * -2 * Physics.gravity.y);
         
     }
 
@@ -26,13 +27,18 @@ public class PlayerController : MonoBehaviour
         var hor = Input.GetAxis("Horizontal");
         var ver = Input.GetAxis("Vertical");
 
+        //Froward motion 
         anim.SetFloat("Speed", ver);
+        //TODO: Move back
+        //Turn left-right
         this.rotation = new Vector3(0, hor * 180 * Time.deltaTime, 0);
         this.transform.Rotate(this.rotation);
+        //Jump
         if(Input.GetButtonDown("Jump")){
-            rigid.AddForce(Vector3.up * JumpForce);
+            rigid.AddForce(new Vector3(rigid.velocity.x, JumpForce, rigid.velocity.z), ForceMode.Impulse);
             anim.SetTrigger("Jump");
         }
+        //Land from jump
         if(Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, groundDistance, isGround)){
             anim.SetBool("Grounded", true);
             anim.applyRootMotion = true;
@@ -40,5 +46,16 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Grounded", false);
         }
         
+    }
+    void LateUpdate() {
+        //Attack
+        if(Input.GetMouseButtonDown(0)){
+            anim.SetTrigger("Attack");
+        }
+        //TODO: Take damage
+        //TODO: Duck
+        //TODO: Pick up
+        //TODO: Die
+        //TODO: Get up
     }
 }
