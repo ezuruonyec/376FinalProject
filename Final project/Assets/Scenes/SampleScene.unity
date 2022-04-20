@@ -1352,7 +1352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382541654}
   m_LocalRotation: {x: -0, y: -0.00036732876, z: -0, w: 1}
-  m_LocalPosition: {x: 4.73, y: 1.52, z: -7.62}
+  m_LocalPosition: {x: 4.68, y: 1.52, z: -7.62}
   m_LocalScale: {x: 1.9784411, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4020,7 +4020,7 @@ GameObject:
   - component: {fileID: 1062292087}
   m_Layer: 0
   m_Name: 'Outer Wall 2 '
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4876,7 +4876,7 @@ GameObject:
   - component: {fileID: 1261752434}
   m_Layer: 0
   m_Name: Outer Wall 1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5293,7 +5293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369250107}
   m_LocalRotation: {x: -0, y: -0.00036732876, z: -0, w: 1}
-  m_LocalPosition: {x: -3.08, y: 1.52, z: -7.97}
+  m_LocalPosition: {x: -3.08, y: 1.52, z: -7.93}
   m_LocalScale: {x: 4.665447, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5503,7 +5503,7 @@ GameObject:
   - component: {fileID: 1570030642}
   m_Layer: 0
   m_Name: Outer Wall 5
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6243,7 +6243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666543726}
   m_LocalRotation: {x: -0, y: -0.00036732876, z: -0, w: 1}
-  m_LocalPosition: {x: -11.67, y: 1.52, z: -9.73}
+  m_LocalPosition: {x: -11.67, y: 1.52, z: -9.74}
   m_LocalScale: {x: 2.2913716, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6453,7 +6453,7 @@ GameObject:
   - component: {fileID: 1694528518}
   m_Layer: 0
   m_Name: Outer Wall 4
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7478,7 +7478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977329560}
   m_LocalRotation: {x: -0, y: -0.7072754, z: -0, w: 0.7069382}
-  m_LocalPosition: {x: -5.68, y: 1.52, z: -7.29}
+  m_LocalPosition: {x: -5.73, y: 1.52, z: -7.29}
   m_LocalScale: {x: 1.8751351, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7783,7 +7783,7 @@ GameObject:
   - component: {fileID: 2048453192}
   m_Layer: 0
   m_Name: Outer Wall 3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
