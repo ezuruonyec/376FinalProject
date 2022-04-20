@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int health = 100;
     private Animator anim;
     private Rigidbody rigid;
     private Vector3 rotation;
-    public float groundDistance = 0.0f;
-    public float JumpForce;
+    public float groundDistance = 0.1f;
+    float JumpForce;
     public LayerMask isGround;
 
 
@@ -17,11 +18,10 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
-        JumpForce = Mathf.Sqrt(2 * -2 * Physics.gravity.y);
+        JumpForce = Mathf.Sqrt(-1 * Physics.gravity.y);
         
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         var hor = Input.GetAxis("Horizontal");
@@ -29,21 +29,26 @@ public class PlayerController : MonoBehaviour
 
         //Froward motion 
         anim.SetFloat("Speed", ver);
-        //TODO: Move back
+        //Move back
+        if(ver < 0){
+            this.transform.Translate(Vector3.forward * ver/10);
+        }
         //Turn left-right
         this.rotation = new Vector3(0, hor * 180 * Time.deltaTime, 0);
         this.transform.Rotate(this.rotation);
         //Jump
         if(Input.GetButtonDown("Jump")){
-            rigid.AddForce(new Vector3(rigid.velocity.x, JumpForce, rigid.velocity.z), ForceMode.Impulse);
-            anim.SetTrigger("Jump");
+            if(rigid.position.y <= 0.5){
+                rigid.AddForce(Vector3.up * JumpForce * 0.75f, ForceMode.Impulse);
+                anim.SetTrigger("Jump");
+            }
         }
         //Land from jump
         if(Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, groundDistance, isGround)){
             anim.SetBool("Grounded", true);
-            anim.applyRootMotion = true;
         } else {
             anim.SetBool("Grounded", false);
+            this.transform.Translate(Vector3.forward * ver/10);
         }
         
     }
@@ -52,10 +57,32 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0)){
             anim.SetTrigger("Attack");
         }
-        //TODO: Take damage
-        //TODO: Duck
-        //TODO: Pick up
-        //TODO: Die
-        //TODO: Get up
+
+        //Block
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            anim.SetBool("Blocking", true);
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift)){
+            anim.SetBool("Blocking", false);
+        }
+
+        //Take damage
+        //if skelly attack collide trigger
+        // anim.SetTrigger("Hit");
+        // subtract health 
+
+        //Pick up
+        if(Input.GetMouseButtonDown(1)){
+            anim.SetTrigger("Gather");
+        }
+        
+        //Death and get up
+        if(health <= 0){
+            anim.SetBool("IsAlive", false);
+        }
+        else{
+            anim.SetBool("IsAlive", true);
+        }
+
     }
 }
