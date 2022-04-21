@@ -3292,7 +3292,7 @@ MonoBehaviour:
   maxHealth: 30
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
-  betweenAttacks: 3
+  betweenAttacks: 4
   attackPoint: {fileID: 261259991}
   sightRange: 3
   attackRange: 0.75

@@ -109,6 +109,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public void TakeDamage(int damage){
+        anim.SetBool("Running", false);
         curHealth -= damage;
         anim.SetTrigger("Damaged");
 
