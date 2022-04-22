@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2273,7 +2273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533498779}
   m_LocalRotation: {x: -0, y: -0.7072754, z: -0, w: 0.7069382}
-  m_LocalPosition: {x: -11.137508, y: -0.9445698, z: 1.0327736}
+  m_LocalPosition: {x: -11.1, y: -0.9445698, z: 1.03}
   m_LocalScale: {x: 2.0335922, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 1004609748}
@@ -4508,7 +4508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056428507}
   m_LocalRotation: {x: -0, y: -0.00036732876, z: -0, w: 1}
-  m_LocalPosition: {x: -8.597508, y: -0.9445698, z: -1.7772262}
+  m_LocalPosition: {x: -8.63, y: -0.9445698, z: -1.82}
   m_LocalScale: {x: 2.1451845, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 1004609748}
@@ -4759,7 +4759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090010378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 5.5}
+  m_LocalPosition: {x: -0.68, y: 0, z: 5.5}
   m_LocalScale: {x: 5.5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5863,6 +5863,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8228290860288972443, guid: 27a905fff68ebfd42b4f262dd4483fc3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228290860288972443, guid: 27a905fff68ebfd42b4f262dd4483fc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.94
+      objectReference: {fileID: 0}
     - target: {fileID: 8228290860289645007, guid: 27a905fff68ebfd42b4f262dd4483fc3, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -6377,7 +6385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337747568}
   m_LocalRotation: {x: -0, y: -0.00036732876, z: -0, w: 1}
-  m_LocalPosition: {x: 9.892491, y: -0.9445698, z: -3.6972263}
+  m_LocalPosition: {x: 9.89, y: -0.9445698, z: -3.73}
   m_LocalScale: {x: 1.990916, y: 2.975, z: 0.5892803}
   m_Children: []
   m_Father: {fileID: 1004609748}
