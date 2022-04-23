@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.LeftShift))
             anim.SetBool("Blocking", false);
         
-        //Pick up
+        //Pick up - not needed but still cool
         if(Input.GetMouseButtonDown(1))
             anim.SetTrigger("Gather");
     }
@@ -111,7 +111,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-void OnDrawGizmosSelected(){
+    void OnTriggerEnter(Collider other)
+    {
+        anim.SetTrigger("Gather");
+        Destroy(other.gameObject);
+    }
+
+    void OnDrawGizmosSelected(){
     if(attackPoint == null)
         return;
 
