@@ -110,11 +110,14 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage){
         anim.SetBool("Running", false);
+        didAttack = true;
+
         curHealth -= damage;
         anim.SetTrigger("Damaged");
 
         //if health below 0 die
         if(curHealth <= 0){
+            didAttack = true;
             anim.SetBool("IsAlive", false);
             Destroy(gameObject, 5);
         }
