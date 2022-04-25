@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
 
         if(!playerInSight && !playerInAttack) Patrol();
         if(playerInSight && !playerInAttack) Chase();
-        if(playerInSight && playerInAttack) Attack();
+        if(playerInSight && playerInAttack && curHealth != 0) Attack();
     }
 
     private void Patrol(){
@@ -117,7 +117,6 @@ public class EnemyController : MonoBehaviour
 
         //if health below 0 die
         if(curHealth <= 0){
-            didAttack = true;
             anim.SetBool("IsAlive", false);
             Destroy(gameObject, 5);
         }
