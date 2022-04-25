@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Cubes
+  - Capsules
+  - Spheres
+  - Enemies
   layers:
   - Default
   - TransparentFX
