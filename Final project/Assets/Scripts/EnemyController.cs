@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 //Inspired by https://www.youtube.com/watch?v=UjkSFoLxesw
-//with additional components
+//with additional components by Hannah Cain 
 
 public class EnemyController : MonoBehaviour
 {
+    //Character setup
     public UnityEngine.AI.NavMeshAgent agent;
+    //public AudioSource swordNoise;
     public Transform player;
     public LayerMask isGround, isPlayer;
     private Animator anim;
@@ -36,12 +38,14 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
+    // Start is called before the first frame update
     void Start(){
         curHealth = maxHealth;
         anim = GetComponent<Animator>();
     }
 
-    private void Update(){
+    // Fixed update is called a set number of times per second
+    private void FixedUpdate(){
         //Is player in sight and/or attack range
         playerInSight = Physics.CheckSphere(transform.position, sightRange, isPlayer);
         playerInAttack = Physics.CheckSphere(transform.position, attackRange, isPlayer);
@@ -51,18 +55,19 @@ public class EnemyController : MonoBehaviour
         if(playerInSight && playerInAttack && curHealth != 0) Attack();
     }
 
+    //Control patrol state
     private void Patrol(){
         anim.SetBool("Running", false);
         if (!walkPointSet) SearchWalkPoint();
 
-        if (walkPointSet) 
+        if (walkPointSet)
             agent.SetDestination(walkPoint);
 
         Vector3 distToWalkPoint = transform.position - walkPoint;
 
         //Walk point reached
         if(distToWalkPoint.magnitude < 1f){
-        anim.SetBool("Running", false);
+            anim.SetBool("Running", false);
             walkPointSet = false;
         }
     }
@@ -78,58 +83,68 @@ public class EnemyController : MonoBehaviour
             walkPointSet = true;
     }
 
+    //If player is spotted, follow
     private void Chase(){
         agent.SetDestination(player.position);
         anim.SetBool("Running", true);
     }
 
+    //If player is in range attack them
     private void Attack(){
         //Freeze movement 
         anim.SetBool("Running", false);
         agent.SetDestination(transform.position);
 
+        //Make sure looking at player 
         transform.LookAt(player);
 
         if (!didAttack){
 
             //Do animation
-        anim.SetTrigger("Attack");
+            anim.SetTrigger("Attack");
+            //swordNoise.Play();
 
-        //Collision
-        Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, isPlayer);
+            //Collision
+            Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, isPlayer);
 
-        //Do damage
-        foreach(Collider enemy in hits){
-            enemy.GetComponent<PlayerController>().TakeDamage(10); 
-        }
+            //Do damage
+            foreach (Collider enemy in hits)
+            {
+                enemy.GetComponent<PlayerController>().TakeDamage(5);
+            }
 
+            //Timer between attacks
             didAttack = true;
             Invoke(nameof(ResetAttack), betweenAttacks);
         }
     }
 
+    //If hit by player, impact health 
     public void TakeDamage(int damage){
+        //Stop movement 
         anim.SetBool("Running", false);
         didAttack = true;
 
+        //Take damage 
         curHealth -= damage;
         anim.SetTrigger("Damaged");
 
         //if health below 0 die
         if(curHealth <= 0){
+            anim.SetBool("Running", false);
+            didAttack = true;
             anim.SetBool("IsAlive", false);
             Destroy(gameObject, 5);
         }
-        else{
-            anim.SetBool("IsAlive", true);
-        }
     }
 
+    //Resets attack timer 
     private void ResetAttack(){
         anim.SetBool("Running", false);
         didAttack = false;
     }
 
+    //Visible sword collider sphere 
     void OnDrawGizmosSelected(){
     if(attackPoint == null)
         return;

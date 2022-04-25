@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+//By Hannah Cain and Chiamaka Ezuruonye
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,17 +17,19 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.1f;
     float JumpForce;
     
+    //Player setup 
     private Animator anim;
     private Rigidbody rigid;
     private Vector3 rotation;
     public LayerMask enemyLayer;
     public LayerMask isGround;
+    //public AudioSource swordNoise;
+    //public AudioSource deflectNoise;
 
     //Collecting and Scoring
     int CubeCount = 0;
     int CapsCount = 0;
     int SphCount = 0;
-    int EnemyCount = 0;
     public bool win = false;
 
     // Start is called before the first frame update
@@ -33,9 +38,9 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         JumpForce = Mathf.Sqrt(-1 * Physics.gravity.y);
-        
     }
 
+    //Fixed update is called a set number of times per second
     void FixedUpdate()
     {
         var hor = Input.GetAxis("Horizontal");
@@ -92,9 +97,11 @@ public class PlayerController : MonoBehaviour
         win = WinCheck();
     }
 
+    //Attack enemy 
     void Attack(){
         //Do animation
         anim.SetTrigger("Attack");
+        //swordNoise.Play();
 
         //Collision
         Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
@@ -105,47 +112,69 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //If attacked by enemy, be impacted 
     public void TakeDamage(int damage){
         if(!anim.GetBool("Blocking")){
-        health -= damage;
-        anim.SetTrigger("Hit");
+            //Act it 
+            anim.SetTrigger("Hit");
+            //deflectNoise.Play();
 
-        //if health below 0 die
-        if(health <= 0){
-            anim.SetBool("IsAlive", false);
-            GetComponent<Collider>().enabled = false;
-            this.enabled = false; 
+            //take damage 
+            health -= damage;
+
+            //if health below 0 die
+            if (health <= 0)
+            {
+                anim.SetBool("IsAlive", false);
+                Invoke(nameof(endGame), 10);
+            }
+            else
+            {
+                anim.SetBool("IsAlive", true);
+            }
         }
         else{
-            anim.SetBool("IsAlive", true);
-        }
-        }
-        else{
+            //If blocking when attacked, no damage 
             anim.SetTrigger("Blockhit");
         }
     }
 
+    //When collecting items 
     void OnTriggerEnter(Collider other)
     {
         anim.SetTrigger("Gather");
-        Destroy(other.gameObject);
-        if(other.tag == "Cubes")
+
+        if (other.tag == "Cubes")
+        {
             CubeCount += 1;
-        else if(other.tag == "Capsules")
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "Capsules")
+        {
             CapsCount += 1;
-        else if(other.tag == "Spheres")
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "Spheres")
+        {
             SphCount += 1;
-        else if(other.tag == "Enemies")
-            EnemyCount += 1;
+            Destroy(other.gameObject);
+        }
     }
     
+    //Make sure necessary items are collected 
     bool WinCheck(){
         return (CubeCount >= 5 &&
             CapsCount >= 5 &&
-            SphCount >= 5 &&
-            EnemyCount >= 3);
+            SphCount >= 5);
+    }
+    
+    //If die return to main menu
+    public void endGame()
+    {
+        SceneManager.LoadScene("WelcomeScene");
     }
 
+    //See sword collider sphere 
     void OnDrawGizmosSelected(){
         if(attackPoint == null)
             return;
